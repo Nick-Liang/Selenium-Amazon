@@ -6,6 +6,7 @@ import au.com.hcf.testframework.cucumber.Configuration;
 import au.com.hcf.testframework.cucumber.StepsBase;
 import au.com.hcf.testframework.selenium.WDUtil;
 import au.com.hcf.testframework.webportal.AmazonHomePage_PO;
+import au.com.hcf.testframework.webportal.AmazonSearchPage_PO;
 import au.com.hcf.testframework.webportal.BasicDetails_PO;
 import au.com.hcf.testframework.webportal.HomePage_PO;
 import cucumber.api.java.en.Given;
@@ -17,30 +18,27 @@ import org.openqa.selenium.support.PageFactory;
 public class AmazonHomePage_steps extends StepsBase{
 
 	@Given("^I am on Amazon home page$")
-	public void i_am_on_HCF_home_page() {
+	public void i_am_on_Amazon_home_page() {
 		String url = ctx().get(CTX.CONFIGURATION, Configuration.class).getBaseURL();
 		getWD().get(url);
-		
 		ctx().put(PageFactory.initElements(getWD(), AmazonHomePage_PO.class));
-		System.out.println("Home page loaded"); //TODO: add actual assert
 		WDUtil.sleep(2000);
 	}
 
-	@When("^I click search box and type$")
-	public void i_navigate_through_health_and_customise_cover_menus() {
-		ctx().get(AmazonHomePage_PO.class).clickHealthMenu();
-		ctx().get(AmazonHomePage_PO.class).clickCustomiseCoverMenu();
+	@When("^I click search box and type \"([^\"]+)\"$")
+	public void I_click_search_box_and_type_and_search(String keywords) {
+		ctx().get(AmazonHomePage_PO.class).clickSearchBox();
+		ctx().get(AmazonHomePage_PO.class).startToSearch(keywords);
 	}
 
-	/*@Then("^I Should see Health insurance page$")
-	public void i_Should_see_Health_insurance_page() {
-		if(getWD().getCurrentUrl().contains("health-insurance"))
-		{
-			System.out.println("Health insurance page displayed");
-		}
+	@Then("^I should see search result page$")
+	public void I_should_see_search_result_page() {
+		WDUtil.sleep(2000);
+		ctx().put(PageFactory.initElements(getWD(), AmazonSearchPage_PO.class));
+		Assert.assertTrue("Search page has to be displayed", ctx().get(AmazonSearchPage_PO.class).searchPageTemplate.isDisplayed());
 	}
 
-	@Then("^I Should see Trauma injury page$")
+	/*@Then("^I Should see Trauma injury page$")
 	public void i_Should_see_Trauma_injury_page() {
 		//TODO Nikolay: do a better verification
 		if(getWD().getCurrentUrl().contains("trauma-injury---income"))

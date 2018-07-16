@@ -19,53 +19,21 @@ public class AmazonHomePage_PO extends BasePageObject{
 	@FindBy(how=How.ID, using="twotabsearchtextbox")
 	public WebElement searchBox;
 
-	@FindBy(how=How.XPATH, using="//a[text()='Customise cover']")
-	public WebElement customiseCover;
+	@FindBy(how=How.CLASS_NAME, using="nav-input")
+	public WebElement searchButton;
 
-	@FindBy(how=How.XPATH, using="//a[text()='Insurance']")
-	public WebElement insuranceMenu;
+	@FindBy(how=How.ID, using="desktop-banner")
+	public WebElement topBanner;
 
-	public void clickHealthMenu() {
-		WebElement healthmenu = (new WebDriverWait(driver, 30))
-				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span.heading")));
-		healthmenu.click();
+	public void clickSearchBox() {
+		searchBox.click();
 	}
 
-	public void clickLinkUnderTwoLevelMenu(String mainMenu, String subMenu, String linkText){
-		WebElement mainMenuLink = (new WebDriverWait(driver, 5)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-				"//div[@class='navbar']/ul/li/a[contains(text(),'"+mainMenu+"')]"
-			)));
-
-		//click main menu
-		new Actions(driver).moveToElement(mainMenuLink).build().perform();
-		mainMenuLink.click();
-		(new WebDriverWait(driver, 5)) //wait animation to finish
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='navbar']/ul/li[contains(@class,'is-hover')]/a[contains(text(),'"+mainMenu+"')]")));
-		
-		
-		//click submenu
-		WebElement subMenuLink = (new WebDriverWait(driver, 5))
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='lvl2link' and contains(text(),'"+subMenu+"')]")));
-		(new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(subMenuLink));
-		new Actions(driver).moveToElement(subMenuLink).build().perform();
-		
-		(new WebDriverWait(driver, 5)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-				"//div[@class='navbar']/ul/li[a[contains(text(),'"+mainMenu+"')]]"+
-				"/descendant::div[@class='dd-level2-inner' and a[contains(text(),'"+subMenu+"')]]/div[@class='dropdown-lvl2']"
-			))); //wait animation to finish
-		
-		//click a link
-		WebElement linkUnderSubmenu = (new WebDriverWait(driver, 10))
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='dropdown-lvl2']/descendant::a[contains(text(),'"+linkText+"')]")));
-		(new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(linkUnderSubmenu));
-		new Actions(driver).moveToElement(linkUnderSubmenu).click().build().perform();
-						
-	}
-
-	public void clickCustomiseCoverMenu(){
-		WebElement customisecovermenu = (new WebDriverWait(driver, 30))
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='Customise cover']")));
-		customisecovermenu.click();
+	public void startToSearch(String keywords){
+		searchBox.sendKeys(keywords);
+		WebElement navCover = (new WebDriverWait(driver, 100)).until(ExpectedConditions.presenceOfElementLocated(By.id("nav-cover")));
+		(new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(navCover));
+		new Actions(driver).moveToElement(searchButton).click().build().perform();
 	}
 
 }
