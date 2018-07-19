@@ -11,6 +11,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class AmazonHomePage_PO extends BasePageObject{
 
 	public AmazonHomePage_PO(WebDriver driver) {
@@ -32,7 +34,7 @@ public class AmazonHomePage_PO extends BasePageObject{
 
 	public void startToSearch(String keywords){
 		searchBox.sendKeys(keywords);
-		WDUtil.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		new Actions(driver).moveToElement(searchButton).click().build().perform();
 	}
 

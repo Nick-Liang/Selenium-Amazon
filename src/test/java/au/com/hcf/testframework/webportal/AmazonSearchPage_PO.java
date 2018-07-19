@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AmazonSearchPage_PO extends BasePageObject{
 
@@ -35,11 +36,13 @@ public class AmazonSearchPage_PO extends BasePageObject{
 			for(WebElement element : searchResults){
 				if(element.getText().contains(name)){
 					scrollIntoViewSmoothly(element);
+					WDUtil.sleep(1500);
 					clickItem(element);
 					return;
 				}
 			}
 			scrollIntoViewSmoothly(nextPageBtn);
+			WDUtil.sleep(1000);
 			clickItem(nextPageBtn);
 		}
 	}
@@ -49,8 +52,8 @@ public class AmazonSearchPage_PO extends BasePageObject{
 	}
 
 	private void scrollIntoViewSmoothly(WebElement element){
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"center\"});", element);
-		(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(element));
+//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		((JavascriptExecutor) driver).executeScript("window.scrollTo({top: "+ (element.getLocation().y - 200) +", behavior: 'smooth'});", element);
 	}
 }
 
