@@ -5,6 +5,7 @@ import java.net.URL;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
@@ -44,8 +45,9 @@ public class Hooks extends StepsBase{
 					System.out.println(path);					
 					
 					DesiredCapabilities capability = new DesiredCapabilities("chrome", "*", Platform.ANY);
-					System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"scripts\\chromedriver.exe");
-					newWD = new RemoteWebDriver(new URL(ctx().get(CTX.CONFIGURATION, Configuration.class).getWDS()), capability);
+					System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\scripts\\chromedriver.exe");
+//					newWD = new RemoteWebDriver(new URL(ctx().get(CTX.CONFIGURATION, Configuration.class).getWDS()), capability);
+					newWD = new ChromeDriver(capability);
 					}
 				else if(browserName.equalsIgnoreCase("firefox")){					
 				//	System.setProperty("webdriver.gecko.driver","C:\\geckodriver-v0.14.0-win64\\geckodriver.exe");

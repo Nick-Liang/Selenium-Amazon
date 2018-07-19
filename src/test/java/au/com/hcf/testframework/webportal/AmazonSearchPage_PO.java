@@ -24,7 +24,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 	public WebElement searchPageTemplate;
 
 	@FindBy(how=How.ID, using="pagnNextString")
-	public WebElement nexPageBtn;
+	public WebElement nextPageBtn;
 
 	private int totalSacnnedPage = 50;
 
@@ -35,13 +35,12 @@ public class AmazonSearchPage_PO extends BasePageObject{
 			for(WebElement element : searchResults){
 				if(element.getText().contains(name)){
 					scrollIntoViewSmoothly(element);
-
 					clickItem(element);
 					return;
 				}
 			}
-			scrollIntoViewSmoothly(nexPageBtn);
-			clickItem(nexPageBtn);
+			scrollIntoViewSmoothly(nextPageBtn);
+			clickItem(nextPageBtn);
 		}
 	}
 
@@ -51,6 +50,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 
 	private void scrollIntoViewSmoothly(WebElement element){
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: \"smooth\", block: \"center\", inline: \"center\"});", element);
+		(new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(element));
 	}
 }
 
