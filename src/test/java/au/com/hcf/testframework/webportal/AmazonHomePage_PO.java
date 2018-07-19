@@ -1,5 +1,6 @@
 package au.com.hcf.testframework.webportal;
 
+import au.com.hcf.testframework.selenium.WDUtil;
 import au.com.hcf.testframework.selenium.base.BasePageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,8 +32,7 @@ public class AmazonHomePage_PO extends BasePageObject{
 
 	public void startToSearch(String keywords){
 		searchBox.sendKeys(keywords);
-		WebElement navCover = (new WebDriverWait(driver, 100)).until(ExpectedConditions.presenceOfElementLocated(By.id("nav-cover")));
-		(new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(navCover));
+		WDUtil.sleep(2000);
 		new Actions(driver).moveToElement(searchButton).click().build().perform();
 	}
 

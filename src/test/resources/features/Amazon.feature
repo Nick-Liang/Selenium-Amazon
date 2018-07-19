@@ -5,8 +5,8 @@ Feature: Amazon First Test
     Given I am on Amazon home page
     When I click search box and type "<Beutii Keywords>"
     Then I should see search result page
+    Then I will scroll to "<Item Title>"
 
     Examples:
-      | Beutii Keywords|
-      | UV box  |
-      | sexy Lingerie |
+      | Beutii Keywords| Item Title |
+      | UV box         | Vitamin C Facial Serum     |

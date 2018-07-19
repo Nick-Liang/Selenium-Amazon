@@ -22,7 +22,6 @@ public class AmazonHomePage_steps extends StepsBase{
 		String url = ctx().get(CTX.CONFIGURATION, Configuration.class).getBaseURL();
 		getWD().get(url);
 		ctx().put(PageFactory.initElements(getWD(), AmazonHomePage_PO.class));
-		WDUtil.sleep(2000);
 	}
 
 	@When("^I click search box and type \"([^\"]+)\"$")
@@ -33,22 +32,16 @@ public class AmazonHomePage_steps extends StepsBase{
 
 	@Then("^I should see search result page$")
 	public void I_should_see_search_result_page() {
-		WDUtil.sleep(2000);
 		ctx().put(PageFactory.initElements(getWD(), AmazonSearchPage_PO.class));
 		Assert.assertTrue("Search page has to be displayed", ctx().get(AmazonSearchPage_PO.class).searchPageTemplate.isDisplayed());
 	}
 
-	/*@Then("^I Should see Trauma injury page$")
-	public void i_Should_see_Trauma_injury_page() {
-		//TODO Nikolay: do a better verification
-		if(getWD().getCurrentUrl().contains("trauma-injury---income"))
-		{
-			System.out.println("Trauma injury page displayed");
-		}
-
+	@Then("^I will scroll to \"([^\"]+)\"$")
+	public void i_scroll_to_the_item(String itemName) {
+		ctx().get(AmazonSearchPage_PO.class).scrollIntoView(itemName);
 	}
 
-	@Then("^I Should see Travel insurance page$")
+	/*@Then("^I Should see Travel insurance page$")
 	public void i_Should_see_Travel_insurance_page() {
 		if(getWD().getCurrentUrl().contains("travel-insurance"))
 		{
