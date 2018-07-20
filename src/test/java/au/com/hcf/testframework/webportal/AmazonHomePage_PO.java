@@ -2,7 +2,9 @@ package au.com.hcf.testframework.webportal;
 
 import au.com.hcf.testframework.selenium.WDUtil;
 import au.com.hcf.testframework.selenium.base.BasePageObject;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -33,7 +35,11 @@ public class AmazonHomePage_PO extends BasePageObject{
 	}
 
 	public void startToSearch(String keywords){
-		searchBox.sendKeys(keywords);
+		if(StringUtils.isNotBlank(searchBox.getAttribute("value"))){
+			searchBox.sendKeys(Keys.chord(Keys.CONTROL, "a"), keywords);
+		}else{
+			searchBox.sendKeys(keywords);
+		}
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		new Actions(driver).moveToElement(searchButton).click().build().perform();
 	}

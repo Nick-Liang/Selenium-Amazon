@@ -27,7 +27,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 	@FindBy(how=How.ID, using="pagnNextString")
 	public WebElement nextPageBtn;
 
-	private int totalSacnnedPage = 50;
+	private int totalSacnnedPage = 10;
 
 	public void scrollIntoView(String name){
 		int pageNo = 1;
@@ -42,6 +42,9 @@ public class AmazonSearchPage_PO extends BasePageObject{
 				}
 			}
 			scrollIntoViewSmoothly(nextPageBtn);
+			if(!nextPageBtn.isEnabled()){
+				return;
+			}
 			WDUtil.sleep(1000);
 			clickItem(nextPageBtn);
 		}
@@ -52,7 +55,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 	}
 
 	private void scrollIntoViewSmoothly(WebElement element){
-//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.id("rhf-container")));
 		((JavascriptExecutor) driver).executeScript("window.scrollTo({top: "+ (element.getLocation().y - 200) +", behavior: 'smooth'});", element);
 	}
 }
