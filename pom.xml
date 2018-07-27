@@ -162,7 +162,7 @@
 								</goals>
 								<configuration>
 									<buildNumber>1</buildNumber>
-									<projectName>HCF_Digital_Test_Framework</projectName>
+									<projectName>Beutii_Test_Framework</projectName>
 									<outputDirectory>${project.build.directory}/site/cucumber-reports</outputDirectory>
 									<cucumberOutput>${project.build.directory}/cucumber-parallel</cucumberOutput>
 									<enableFlashCharts>false</enableFlashCharts>
@@ -186,7 +186,7 @@
 								<configuration>
 									<!-- Mandatory -->
 									<!-- comma separated list of package names to scan for glue code -->
-									<glue>au.com.hcf.testframework.webportal.steps</glue>
+									<glue>au.com.beutii.testframework.webportal.steps</glue>
 									<!-- These are the default values -->
 									<!-- Where to output the generated Junit tests -->
 									<outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
@@ -279,7 +279,7 @@
 								</goals>
 								<configuration>
 									<buildNumber>1</buildNumber>
-									<projectName>HCF_Digital_Test_Framework</projectName>
+									<projectName>Beutii_Test_Framework</projectName>
 									<outputDirectory>${project.build.directory}/site/cucumber-reports</outputDirectory>
 									<cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
 									<enableFlashCharts>false</enableFlashCharts>

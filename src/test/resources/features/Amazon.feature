@@ -24,9 +24,9 @@ Feature: Amazon First Test
     Then I will scroll to "<Item Title>"
 
     Examples:
-      | Keywords| Item Title |
-      | UV box         | Lagunamoon Gel Nail Polish |
-      | keyboard       | MK120 |
+      | Keywords     | Item Title |
+      | bodystocking | Beutii     |
+      | sexy lingerie| Beutii     |
 
   @Amazon @end
   Scenario: Close my browser
