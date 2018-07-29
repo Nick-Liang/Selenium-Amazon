@@ -22,7 +22,8 @@ Feature: Amazon First Test
     When I click search box and type "<Keywords>"
     Then I should see search result page
     Then I will scroll to "<Item Title>"
-
+    When I click add to cart
+    Then I should see add cart successful page
     Examples:
       | Keywords     | Item Title |
       | bodystocking | Beutii     |

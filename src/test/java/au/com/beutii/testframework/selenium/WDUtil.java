@@ -3,12 +3,10 @@ package au.com.beutii.testframework.selenium;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 
 import cucumber.api.Scenario;
+import org.openqa.selenium.interactions.Actions;
 
 public class WDUtil {
 
@@ -65,4 +63,11 @@ public class WDUtil {
 		return false;
 	}
 
+	public static void clickItem(WebDriver driver, WebElement element){
+		new Actions(driver).moveToElement(element).click().build().perform();
+	}
+
+	public static void scrollIntoViewSmoothly(WebDriver driver, WebElement element){
+		((JavascriptExecutor) driver).executeScript("window.scrollTo({top: "+ (element.getLocation().y - 500) +", behavior: 'smooth'});", element);
+	}
 }
