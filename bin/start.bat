@@ -1,0 +1,1 @@
+java -cp "Beutii_Order_Framework-0.0.1-SNAPSHOT-tests.jar;lib/*" cucumber.api.cli.Main --glue au.com.beutii.testframework.webportal.steps --no-strict -m --plugin pretty --tags @Amazon feature/Amazon.feature

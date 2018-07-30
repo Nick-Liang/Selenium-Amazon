@@ -13,8 +13,8 @@ import cucumber.api.junit.Cucumber;
 		glue = "au.com.beutii.testframework.webportal.steps",
 		format = { 
 				"pretty",
-			    "html:target/site/cucumber-pretty",
-			    "json:target/cucumber.json" 
+			    "html:report/site/cucumber-pretty",
+			    "json:report/cucumber.json"
 			    }, 
 		monochrome = true,
 		tags = { 
