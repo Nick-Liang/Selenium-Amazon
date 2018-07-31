@@ -2,6 +2,7 @@ package au.com.beutii.testframework.webportal;
 
 import au.com.beutii.testframework.selenium.WDUtil;
 import au.com.beutii.testframework.selenium.base.BasePageObject;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,22 +26,37 @@ public class AmazonSearchPage_PO extends BasePageObject{
 	@FindBy(how=How.ID, using="pagnNextString")
 	public WebElement nextPageBtn;
 
-	private int totalSacnnedPage = 10;
+	private int totalSacnnedPage = 1;
 
 	public void scrollIntoView(String name){
 		int pageNo = 1;
 		while(pageNo <= totalSacnnedPage){
-			List<WebElement> searchResults = new WebDriverWait(driver, 5).until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//ul[@id='s-results-list-atf']//li//div[@class='a-column a-span12 a-text-center']"), 30));
-			for(WebElement element : searchResults){
-				WDUtil.scrollIntoViewSmoothly(driver, element);
-				WDUtil.sleep(500);
-				if (element.getText().contains(name)) {
+			new WebDriverWait(driver, 5).until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//ul[@id='s-results-list-atf']//li"), 40));
+			List<WebElement> spanSearchResults = driver.findElements(By.xpath("//ul[@id='s-results-list-atf']//li//div[@class='a-column a-span12 a-text-center']//span"));
+			List<WebElement> imgSearchResults = driver.findElements(By.xpath("//ul[@id='s-results-list-atf']//li//div[@class='a-column a-span12 a-text-center']//img"));
+			if(!spanSearchResults.isEmpty()){
+				for(WebElement element : spanSearchResults){
 					WDUtil.scrollIntoViewSmoothly(driver, element);
-					WDUtil.sleep(1500);
-					WDUtil.clickItem(driver, element.findElement(By.xpath("../../div[position()=1]")));
-					return;
+					WDUtil.sleep(500);
+					if (element.getText().contains(name)) {
+						WDUtil.scrollIntoViewSmoothly(driver, element);
+						WDUtil.sleep(1500);
+						WDUtil.clickItem(driver, element.findElement(By.xpath("../../../div[position()=1]")));
+						return;
+					}
 				}
+			}else if(!imgSearchResults.isEmpty()){
+				for(WebElement element : imgSearchResults){
+					WDUtil.scrollIntoViewSmoothly(driver, element);
+					WDUtil.sleep(500);
+					if (element.getAttribute("alt").contains(name)) {
+						WDUtil.scrollIntoViewSmoothly(driver, element);
+						WDUtil.sleep(1500);
+						WDUtil.clickItem(driver, element.findElement(By.xpath("../../../../div[@class='a-row a-spacing-small']")));
+						return;
+					}
 
+				}
 			}
 			WDUtil.scrollIntoViewSmoothly(driver, nextPageBtn);
 			WDUtil.sleep(1500);
@@ -49,6 +65,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 			}
 			WDUtil.clickItem(driver, nextPageBtn);
 		}
+		Assert.assertTrue("No result found", false);
 	}
 }
 

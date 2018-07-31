@@ -26,10 +26,14 @@ Feature: Amazon First Test
     Then I should see add cart successful page
     Examples:
       | Keywords     | Item Title |
-      | bodystocking | Beutii     |
-      | sexy lingerie| Beutii     |
+      | sports shoes | adidas   |
 
   @Amazon @end
-  Scenario: Close my browser
+  Scenario Outline: Close my browser
     Given I am signing out
+    When All tests are completed
+    Then I should send an email to "<To>", from "<From>", with msg "<Message>" and password is "<Password>"
+    Examples:
+      | To     | From | Message | Password |
+      | simon@monamii.cn;conan@monamii.cn | notification@monamii.cn | Cart is ready please login <b>nick.liang.au@gmail.com</b> to check | Welcome?12345 |
 

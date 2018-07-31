@@ -8,8 +8,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		strict = false, 
-		features = "classpath:features", 
+		features = "classpath:features",
 		glue = "au.com.beutii.testframework.webportal.steps",
 		format = { 
 				"pretty",

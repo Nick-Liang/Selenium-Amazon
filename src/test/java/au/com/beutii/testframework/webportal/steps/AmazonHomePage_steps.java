@@ -46,10 +46,4 @@ public class AmazonHomePage_steps extends StepsBase{
 		ctx().get(AmazonSearchPage_PO.class).scrollIntoView(itemName);
 	}
 
-	@Given("^I am signing out$")
-	public void i_am_signing_out() {
-		Assert.assertTrue(ctx().get(AmazonLogin_PO.class).amISignedIn());
-		ctx().get(AmazonLogin_PO.class).hoverToSignIn();
-		ctx().get(AmazonLogin_PO.class).clickSignOut();
-	}
 }
