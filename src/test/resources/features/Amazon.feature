@@ -26,7 +26,7 @@ Feature: Amazon First Test
     Then I should see add cart successful page
     Examples:
       | Keywords     | Item Title |
-      | sports shoes | adidas   |
+      | bodystocking | Beutii     |
 
   @Amazon @end
   Scenario Outline: Close my browser
@@ -35,5 +35,5 @@ Feature: Amazon First Test
     Then I should send an email to "<To>", from "<From>", with msg "<Message>" and password is "<Password>"
     Examples:
       | To     | From | Message | Password |
-      | simon@monamii.cn;conan@monamii.cn | notification@monamii.cn | Cart is ready please login <b>nick.liang.au@gmail.com</b> to check | Welcome?12345 |
+      | simon@monamii.cn;conan@monamii.cn | notification@monamii.cn | Cart is ready please login <b>nick.liang.au@gmail.com</b> to check | welcome?12345 |
 

@@ -26,13 +26,13 @@ public class AmazonSearchPage_PO extends BasePageObject{
 	@FindBy(how=How.ID, using="pagnNextString")
 	public WebElement nextPageBtn;
 
-	private int totalSacnnedPage = 1;
+	private int totalSacnnedPage = 10;
 
 	public void scrollIntoView(String name){
 		int pageNo = 1;
 		while(pageNo <= totalSacnnedPage){
 			new WebDriverWait(driver, 5).until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//ul[@id='s-results-list-atf']//li"), 40));
-			List<WebElement> spanSearchResults = driver.findElements(By.xpath("//ul[@id='s-results-list-atf']//li//div[@class='a-column a-span12 a-text-center']//span"));
+			List<WebElement> spanSearchResults = driver.findElements(By.xpath("//ul[@id='s-results-list-atf']//li//div[@class='a-column a-span12 a-text-center']"));
 			List<WebElement> imgSearchResults = driver.findElements(By.xpath("//ul[@id='s-results-list-atf']//li//div[@class='a-column a-span12 a-text-center']//img"));
 			if(!spanSearchResults.isEmpty()){
 				for(WebElement element : spanSearchResults){
@@ -41,7 +41,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 					if (element.getText().contains(name)) {
 						WDUtil.scrollIntoViewSmoothly(driver, element);
 						WDUtil.sleep(1500);
-						WDUtil.clickItem(driver, element.findElement(By.xpath("../../../div[position()=1]")));
+						WDUtil.clickItem(driver, element.findElement(By.xpath("../../div[position()=1]")));
 						return;
 					}
 				}
@@ -64,6 +64,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 				return;
 			}
 			WDUtil.clickItem(driver, nextPageBtn);
+			pageNo++;
 		}
 		Assert.assertTrue("No result found", false);
 	}

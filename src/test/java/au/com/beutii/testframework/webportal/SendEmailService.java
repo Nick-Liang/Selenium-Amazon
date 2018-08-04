@@ -52,6 +52,7 @@ public class SendEmailService {
 			}else{
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			}
+			message.setFrom(from);
 			message.setSubject("Cart added @ " + sdf.format(new Date()));
 			message.setText(msg);
 			//send message
