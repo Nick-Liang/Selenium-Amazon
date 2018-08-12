@@ -28,7 +28,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 
 	private int totalSacnnedPage = 15;
 
-	public void scrollIntoView(String name){
+	public void scrollIntoView(String asin){
 		int pageNo = 1;
 		while(pageNo <= totalSacnnedPage){
 			List<WebElement> searchResults = new WebDriverWait(driver, 5).until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//ul[@id='s-results-list-atf']//li"), 40));
@@ -36,7 +36,7 @@ public class AmazonSearchPage_PO extends BasePageObject{
 				for(WebElement element : searchResults){
 					WDUtil.scrollIntoViewSmoothly(driver, element);
 					WDUtil.sleep(500);
-					if (element.getAttribute("data-asin").contains(name)) {
+					if (element.getAttribute("data-asin").equalsIgnoreCase(asin)) {
 						WDUtil.scrollIntoViewSmoothly(driver, element);
 						WDUtil.sleep(1500);
 						WDUtil.clickItem(driver, element.findElement(By.xpath("//*[contains(@class, 's-access-detail-page')]")));
