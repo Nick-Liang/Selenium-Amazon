@@ -21,12 +21,12 @@ Feature: Amazon First Test
     Given I am on Amazon home page
     When I click search box and type "<Keywords>"
     Then I should see search result page
-    Then I will scroll to "<Item Title>"
+    Then I will scroll to "<ASIN>"
     When I click add to cart
     Then I should see add cart successful page
     Examples:
-      | Keywords     | Item Title |
-      | bodystocking | Beutii     |
+      | Keywords     | ASIN |
+      | bodystocking | B07CWPW9DY |
 
   @Amazon @end
   Scenario Outline: Close my browser

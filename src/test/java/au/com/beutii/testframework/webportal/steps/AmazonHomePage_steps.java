@@ -42,8 +42,8 @@ public class AmazonHomePage_steps extends StepsBase{
 	}
 
 	@Then("^I will scroll to \"([^\"]+)\"$")
-	public void i_scroll_to_the_item(String itemName) {
-		ctx().get(AmazonSearchPage_PO.class).scrollIntoView(itemName);
+	public void i_scroll_to_the_item(String asin) {
+		ctx().get(AmazonSearchPage_PO.class).scrollIntoView(asin);
 	}
 
 }

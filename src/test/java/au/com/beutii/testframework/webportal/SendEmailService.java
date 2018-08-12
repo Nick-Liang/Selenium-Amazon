@@ -31,6 +31,7 @@ public class SendEmailService {
 	}
 
 	public void sendNotificationEmail(String to, String from, String msg, String password) {
+
 		//get Session
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
@@ -56,7 +57,7 @@ public class SendEmailService {
 			message.setSubject("Cart added @ " + sdf.format(new Date()));
 			message.setText(msg);
 			//send message
-			Transport.send(message);
+//			Transport.send(message);
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
